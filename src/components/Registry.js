@@ -5,6 +5,7 @@ import PlanetList from "./PlanetList"
 
 function Registry() {
     const [ planets, setPlanets ] = useState([]);
+    const [ searchTerm, setSearchTerm ] = useState('');
 
     useEffect(() => {
         fetch('http://localhost:8085/planets')
@@ -17,11 +18,17 @@ function Registry() {
         setPlanets(planets => [...planets, planetObj]);
     }
 
-    const planetsShown = planets;
+    function searchBy(string) {
+        setSearchTerm(string);
+    }
+
+    const planetsShown = planets.filter(planet => 
+        planet.name.toLowerCase().includes(searchTerm.toLowerCase()) || planet.climate.toLowerCase().includes(searchTerm.toLowerCase()) 
+        || planet.terrain.toLowerCase().includes(searchTerm.toLowerCase()) || planet.population.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return(
         <div className="registry">
-            <Search />
+            <Search searchBy={searchBy}/>
             <div className="content">
                 <PlanetList planetsShown={planetsShown}/>
                 <NewPlanetForm addPlanet={addPlanet}/>
