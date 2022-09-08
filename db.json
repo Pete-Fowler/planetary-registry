@@ -1210,6 +1210,13 @@
       "climate": "cold",
       "terrain": "rocky",
       "population": "1"
+    },
+    {
+      "name": "beavis",
+      "climate": "hot",
+      "terrain": "rocky",
+      "population": "1",
+      "id": 61
     }
   ]
 }
